@@ -2,10 +2,8 @@ name: Sync Fork
 
 on:
   schedule:
-    # 每天 UTC 时间 0:00 (北京时间 8:00) 自动触发
-    - cron: '0 0 * * *'
-  # 允许在 GitHub 页面上手动点击按钮触发同步
-  workflow_dispatch: 
+    - cron: '0 0 * * *' # 每天北京时间 8:00 自动触发
+  workflow_dispatch:   # 允许手动触发
 
 jobs:
   sync:
@@ -14,13 +12,10 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
-          # 必须设置为 true 以允许向仓库推送更改
           persist-credentials: true
 
       - name: Sync Upstream
-        # 使用 GitHub 官方自带的原生 CLI 进行同步，不需要任何第三方插件
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{secrets.GITHUB_TOKEN}}
         run: |
-          # sync 后面填你自己的要同步的分支名，例如 main 或 master
-          gh repo sync ${{ github.repository }} -b main 
+          gh repo sync ${{github.repository}} -b main
