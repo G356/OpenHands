@@ -489,6 +489,16 @@ export default [
     },
   },
   {
+    // These completed owners use named recipes; other geometry stays warning-only.
+    files: [
+      "src/components/features/command-menu/command-menu.tsx",
+      "src/components/features/backends/backend-version.tsx",
+      "src/components/features/settings/settings-nav-header.tsx",
+      "src/components/features/settings/backend-synced-settings-badge.tsx",
+    ],
+    rules: { "shadcn/no-arbitrary-values": "error" },
+  },
+  {
     // Audit literal class recipes that dynamic map/helper lookups hide.
     // Keep broad string scanning away from unrelated program tags.
     files: [
@@ -526,6 +536,17 @@ export default [
       "shadcn/no-restyle": "off",
       "shadcn/require-static-classes": "off",
     },
+  },
+  {
+    // Appearance owners already use class recipes and semantic variables.
+    // Keep the rest warning-only until each owner's dynamic styles are audited.
+    files: [
+      "src/ui/divider.tsx",
+      "src/ui/toggle-switch.tsx",
+      "src/ui/combobox-caret.tsx",
+      "src/components/features/backends/backend-status-dot.tsx",
+    ],
+    rules: { "shadcn/no-inline-styles": "error" },
   },
   {
     // Public embedding API: this owner must forward arbitrary caller styles.
